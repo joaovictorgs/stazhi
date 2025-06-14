@@ -1,4 +1,8 @@
-package br.inatel.stazhi.util.dBConexao;
+package br.inatel.stazhi.util.dbConexao;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 
 public class DBConexao {
 
