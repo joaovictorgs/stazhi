@@ -1,0 +1,12 @@
+services:
+  postgres:
+    container_name: stazhi
+    image: bitnami/postgresql
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_USER: stazhi
+      POSTGRES_PASSWORD: stazhi
+      POSTGRES_DB: stazhi
+    volumes:
+      - ./postgres_data:/bitnami/postgresql
