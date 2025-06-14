@@ -10,7 +10,7 @@ public class DBConexao {
     private static final String USER = "stazhi";
     private static final String PASSWORD = "stazhi";
 
-    public static Connection getConnection() throws ClassNotFoundException, SQLException {
+    public static Connection getConnection() {
         try {
             return DriverManager.getConnection(URL, USER, PASSWORD);
         } catch (SQLException e) {
