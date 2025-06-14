@@ -1,22 +1,20 @@
 package br.inatel.stazhi.model.candidatura;
 
-import br.inatel.stazhi.model.aluno.Aluno;
-import br.inatel.stazhi.model.vaga.Vaga;
-
 public class Candidatura {
-    private Vaga vaga;
-    private Aluno aluno;
+    private int vagaId;
+    private int alunoId;
 
-    public Candidatura(Vaga vaga, Aluno aluno){
-        this.vaga = vaga;
-        this.aluno = aluno;
+    public Candidatura(int vagaId, int alunoId){
+        this.vagaId = vagaId;
+        this.alunoId = alunoId;
     }
 
-    public Vaga getVaga(){
-        return this.vaga;
+    public int getVagaId(){
+        return this.vagaId;
     }
 
-    public Aluno getAluno(){
-        return this.aluno;
+    public int getAlunoId(){
+        return this.alunoId;
     }
+    
 }

@@ -42,4 +42,20 @@ public class Aluno extends Usuario {
         return this.senha;
     }
 
+    public int getIdade() {
+        return this.idade;
+    }
+
+    public void setIdade(int idade) {
+        this.idade = idade;
+    }
+
+    public String getFormacao() {
+        return this.formacao;
+    }
+
+    public int getId() {
+        return this.id;
+    }
+
 }
