@@ -4,11 +4,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-import br.inatel.stazhi.interfaces.gerenciadorDeDados.GerenciadorDeDados;
+import br.inatel.stazhi.interfaces.gerenciadorComId.GerenciadorComID;
 import br.inatel.stazhi.model.aluno.Aluno;
 import br.inatel.stazhi.util.dbConexao.DBConexao;
 
-public class AlunoRepositorio implements GerenciadorDeDados<Aluno> {
+public class AlunoRepositorio implements GerenciadorComID<Aluno> {
   private Connection conn;
 
     public AlunoRepositorio() {

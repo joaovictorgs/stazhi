@@ -4,11 +4,11 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.PreparedStatement;
 
-import br.inatel.stazhi.interfaces.gerenciadorDeDados.GerenciadorDeDados;
+import br.inatel.stazhi.interfaces.gerenciadorComId.GerenciadorComID;
 import br.inatel.stazhi.model.supervisor.Supervisor;
 import br.inatel.stazhi.util.dbConexao.DBConexao;
 
-public class SupervisorRepositorio implements GerenciadorDeDados<Supervisor> {
+public class SupervisorRepositorio implements GerenciadorComID<Supervisor> {
 
     private Connection conn;
 

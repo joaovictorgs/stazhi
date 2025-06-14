@@ -6,11 +6,11 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 
 import br.inatel.stazhi.Enum.modalidade.Modalidade;
-import br.inatel.stazhi.interfaces.gerenciadorDeDados.GerenciadorDeDados;
+import br.inatel.stazhi.interfaces.gerenciadorComId.GerenciadorComID;
 import br.inatel.stazhi.model.vaga.Vaga;
 import br.inatel.stazhi.util.dbConexao.DBConexao;
 
-public class VagaRepositorio implements GerenciadorDeDados<Vaga> {
+public class VagaRepositorio implements GerenciadorComID<Vaga> {
     private Connection conn;
 
     public VagaRepositorio() {

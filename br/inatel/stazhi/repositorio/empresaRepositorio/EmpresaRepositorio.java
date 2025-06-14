@@ -4,11 +4,11 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.PreparedStatement;
 
-import br.inatel.stazhi.interfaces.gerenciadorDeDados.GerenciadorDeDados;
+import br.inatel.stazhi.interfaces.gerenciadorComId.GerenciadorComID;
 import br.inatel.stazhi.model.empresa.Empresa;
 import br.inatel.stazhi.util.dbConexao.DBConexao;
 
-public class EmpresaRepositorio implements GerenciadorDeDados<Empresa> {
+public class EmpresaRepositorio implements GerenciadorComID<Empresa> {
 
     private Connection conn;
 
@@ -24,7 +24,6 @@ public class EmpresaRepositorio implements GerenciadorDeDados<Empresa> {
             stmt.setString(2, empresa.getEmail());
             stmt.setString(3, empresa.getSenha());
             stmt.setString(4, empresa.getCNPJ());
-            stmt.setString(5, empresa.getSetor());
             stmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
