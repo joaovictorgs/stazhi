@@ -15,5 +15,5 @@ public abstract class Usuario implements Autenticavel{
         this.email = email;
     }
     
-    public void showMenu(){}
+    public abstract void showMenu();
 }
