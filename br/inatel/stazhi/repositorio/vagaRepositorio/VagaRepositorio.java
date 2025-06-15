@@ -1,7 +1,10 @@
 package br.inatel.stazhi.repositorio.vagaRepositorio;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
 
@@ -52,6 +55,30 @@ public class VagaRepositorio implements GerenciadorComID<Vaga> {
             e.printStackTrace();
         }
         return null;
+    }
+
+    public List<Vaga> listarVagas(){
+        String sql = "SELECT * FROM vagas";
+         List<Vaga> vagas = new ArrayList<>();
+         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+             ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                String descricao = rs.getString("descricao");
+                LocalDate dataLimite = rs.getDate("data_limite").toLocalDate();
+                int quantidadeDeCandidaturas = rs.getInt("quantidade_de_candidaturas");
+                String modalidadeStr = rs.getString("modalidade");
+                Modalidade modalidade = Modalidade.valueOf(modalidadeStr);
+                int idEmpresa = rs.getInt("empresas_id");
+
+                Vaga vaga = new Vaga(id, descricao, quantidadeDeCandidaturas, dataLimite, modalidade, idEmpresa);
+                vagas.add(vaga);
+            }
+        }catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return vagas;
     }
 
     @Override

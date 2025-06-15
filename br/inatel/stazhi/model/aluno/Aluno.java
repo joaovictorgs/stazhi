@@ -2,6 +2,7 @@ package br.inatel.stazhi.model.aluno;
 
 import java.util.Scanner;
 
+import br.inatel.stazhi.cli.VagasCLI;
 import br.inatel.stazhi.model.usuario.Usuario;
 
 public class Aluno extends Usuario {
@@ -20,14 +21,14 @@ public class Aluno extends Usuario {
         int escolha = 0;
         while (escolha!=3) {
             System.out.println("=== Menu do Aluno ===");
-            System.out.println("1. Visualizar Dados");
+            System.out.println("1. Visualizar Vagas");
             System.out.println("2. Editar Dados");
             System.out.println("3. Sair");
             System.out.print("Escolha uma opção: ");
             escolha = scanner.nextInt();
             switch (escolha) {
                 case 1:
-                    System.out.println("1. Visualizar Dados");
+                  VagasCLI.Listar();
                     break;
                 case 2:
                     System.out.println("2. Editar Dados");
