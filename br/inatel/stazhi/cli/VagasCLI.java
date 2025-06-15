@@ -6,7 +6,9 @@ import java.util.List;
 import java.util.Scanner;
 
 import br.inatel.stazhi.Enum.modalidade.Modalidade;
+import br.inatel.stazhi.casodeuso.candidatura.CriarCandidatura;
 import br.inatel.stazhi.casodeuso.empresa.CriarVaga;
+import br.inatel.stazhi.execoes.vagaJaExisteException.VagaJaExisteException;
 import br.inatel.stazhi.model.empresa.Empresa;
 import br.inatel.stazhi.model.vaga.Vaga;
 import br.inatel.stazhi.repositorio.vagaRepositorio.VagaRepositorio;
@@ -56,6 +58,25 @@ public class VagasCLI {
             System.out.println("Quantidade de Candidaturas: " + vaga.getQuantidadeDeCandidaturas());
             System.out.println("Data Limite: " + vaga.getDataLimite().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
             System.out.println("Modalidade: " + vaga.getModalidade());
+        }
     }
+
+    public static void inscreverNaVaga(int idAluno) throws VagaJaExisteException{
+        Listar();
+        List<Vaga> vagas = new VagaRepositorio().listarVagas();
+        int nVagas = vagas.size();
+
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("selecione o numero da vaga que deseja se cadastrar");
+        int vagaSelecionada = scanner.nextInt();
+        if(vagaSelecionada > 0 && vagaSelecionada <= nVagas){
+            vagaSelecionada-=1;
+            int idVaga = vagas.get(vagaSelecionada).getId();
+            new CriarCandidatura().executar(idAluno,idVaga);
+        }else{
+            System.out.println("Valor inválido");
+            return;
+        }
+        System.out.println("Candidatou com sucesso na vaga");
     }
 }

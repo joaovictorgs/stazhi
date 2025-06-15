@@ -22,13 +22,14 @@ public class VagaRepositorio implements GerenciadorComID<Vaga> {
 
     @Override
     public void criar(Vaga vaga) {
-        String sql = "INSERT INTO vagas (descricao, quantidade_de_candidaturas, data_limite, modalidade, empresas_id) VALUES (?, ?, ?, ?,?)";
+        String sql = "INSERT INTO vagas (id ,descricao, quantidade_de_candidaturas, data_limite, modalidade, empresas_id) VALUES (?, ?, ?, ?, ?,?)";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
-            stmt.setString(1, vaga.getDescricao());
-            stmt.setInt(2, vaga.getQuantidadeDeCandidaturas());
-            stmt.setDate(3, java.sql.Date.valueOf(vaga.getDataLimite()));
-            stmt.setString(4, vaga.getModalidade().toString());
-            stmt.setInt(5, vaga.getIdEmpresa());
+            stmt.setInt(1, vaga.getId());
+            stmt.setString(2, vaga.getDescricao());
+            stmt.setInt(3, vaga.getQuantidadeDeCandidaturas());
+            stmt.setDate(4, java.sql.Date.valueOf(vaga.getDataLimite()));
+            stmt.setString(5, vaga.getModalidade().toString());
+            stmt.setInt(6, vaga.getIdEmpresa());
             stmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();

@@ -3,6 +3,7 @@ package br.inatel.stazhi.model.aluno;
 import java.util.Scanner;
 
 import br.inatel.stazhi.cli.VagasCLI;
+import br.inatel.stazhi.execoes.vagaJaExisteException.VagaJaExisteException;
 import br.inatel.stazhi.model.usuario.Usuario;
 
 public class Aluno extends Usuario {
@@ -28,10 +29,15 @@ public class Aluno extends Usuario {
             escolha = scanner.nextInt();
             switch (escolha) {
                 case 1:
-                  VagasCLI.Listar();
+                    VagasCLI.Listar();
                     break;
                 case 2:
-                    System.out.println("2. Editar Dados");
+                    try {
+                        VagasCLI.inscreverNaVaga(this.id);
+                    } catch (VagaJaExisteException e) {
+                        
+                        System.out.println(e.getMessage()); 
+                    }
                     break;
                 case 3:
                     System.out.println("saindo");
