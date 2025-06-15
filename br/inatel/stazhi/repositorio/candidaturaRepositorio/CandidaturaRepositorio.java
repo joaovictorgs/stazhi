@@ -1,6 +1,7 @@
 package br.inatel.stazhi.repositorio.candidaturaRepositorio;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 
 import br.inatel.stazhi.interfaces.gerenciadorDeDados.GerenciadorDeDados;
 import br.inatel.stazhi.model.candidatura.Candidatura;
@@ -16,8 +17,8 @@ public class CandidaturaRepositorio implements GerenciadorDeDados<Candidatura> {
 
     @Override
     public void criar(Candidatura candidatura) {
-        String sql = "INSERT INTO candidaturas (vaga_id, aluno_id) VALUES (?, ?)";
-        try (var stmt = conn.prepareStatement(sql)) {
+        String sql = "INSERT INTO candidaturas (vagas_id, alunos_id) VALUES (?, ?)";
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setInt(1, candidatura.getVagaId());
             stmt.setInt(2, candidatura.getAlunoId());
             stmt.executeUpdate();
@@ -28,8 +29,8 @@ public class CandidaturaRepositorio implements GerenciadorDeDados<Candidatura> {
     }
 
    public Candidatura carregarPorIds(int vagaId, int alunoId) {
-        String sql = "SELECT * FROM candidaturas WHERE vaga_id = ? AND aluno_id = ?";
-        try (var stmt = conn.prepareStatement(sql)) {
+        String sql = "SELECT * FROM candidaturas WHERE vagas_id = ? AND alunos_id = ?";
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setInt(1, vagaId);
             stmt.setInt(2, alunoId);
             var rs = stmt.executeQuery();
@@ -44,8 +45,8 @@ public class CandidaturaRepositorio implements GerenciadorDeDados<Candidatura> {
 
     @Override
     public void atualizar(Candidatura candidatura) {
-        String sql = "UPDATE candidaturas SET vaga_id = ?, aluno_id = ? WHERE id = ?";
-        try (var stmt = conn.prepareStatement(sql)) {
+        String sql = "UPDATE candidaturas SET vagas_id = ?, alunos_id = ? WHERE id = ?";
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setInt(1, candidatura.getVagaId());
             stmt.setInt(2, candidatura.getAlunoId());
             stmt.executeUpdate();
@@ -55,13 +56,29 @@ public class CandidaturaRepositorio implements GerenciadorDeDados<Candidatura> {
     }
 
    public void deletarPorIds(int vagaId, int alunoId) {
-        String sql = "DELETE FROM candidaturas WHERE vaga_id = ? AND aluno_id = ?";
-        try (var stmt = conn.prepareStatement(sql)) {
+        String sql = "DELETE FROM candidaturas WHERE vagas_id = ? AND alunos_id = ?";
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setInt(1, vagaId);
             stmt.setInt(2, alunoId);
             stmt.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public boolean existePorId(int vagaId, int alunoId){
+        String sql = "SELECT * FROM candidaturas WHERE vagas_id = ? AND alunos_id = ?";
+        try(PreparedStatement stmt = conn.prepareStatement(sql)){
+            stmt.setInt(1, vagaId);
+            stmt.setInt(2, alunoId);
+            var rs = stmt.executeQuery();
+            if (rs.next()) {
+                return rs.getInt(1) > 0;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+
+        }
+        return false;
     }
 }
