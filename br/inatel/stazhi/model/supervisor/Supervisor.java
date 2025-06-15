@@ -1,5 +1,7 @@
 package br.inatel.stazhi.model.supervisor;
 
+import java.util.Scanner;
+
 import br.inatel.stazhi.model.usuario.Usuario;
 
 public class Supervisor extends Usuario {
@@ -12,11 +14,30 @@ public class Supervisor extends Usuario {
 
     @Override
     public void showMenu() {
+        Scanner scanner = new Scanner(System.in);
+        int escolha = 0;
+        while (escolha!=3) {
         System.out.println("=== Menu do Supervisor ===");
         System.out.println("1. Visualizar Dados");
         System.out.println("2. Editar Dados");
         System.out.println("3. Sair");
         System.out.print("Escolha uma opção: ");
+        escolha = scanner.nextInt();
+            switch (escolha) {
+                case 1:
+                    System.out.println("1. Visualizar Dados");
+                    break;
+                case 2:
+                    System.out.println("2. Editar Dados");
+                    break;
+                case 3:
+                    System.out.println("saindo");
+                    break;
+                default:
+                    System.out.println("Insira um dos valores especificados");
+                    break;
+            }
+        }
     }
     
     public String getNome(){
