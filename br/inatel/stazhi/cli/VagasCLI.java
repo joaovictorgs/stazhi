@@ -61,6 +61,24 @@ public class VagasCLI {
         }
     }
 
+    public static void Listar(int idEmpresa){
+        List<Vaga> vagas = new VagaRepositorio().listarVagasPorEmpresa(idEmpresa);
+        if (vagas.isEmpty()) {
+            System.out.println("Nenhuma vaga disponível no momento.");
+            return;
+        }
+        System.out.println("=== Suas Vagas ===");
+        for (int i = 0; i < vagas.size(); i++) {
+            Vaga vaga = vagas.get(i);
+            System.out.println("\nVaga " + (i + 1) + ":");
+            System.out.println("ID: " + vaga.getId());
+            System.out.println("Descrição: " + vaga.getDescricao());
+            System.out.println("Quantidade de Candidaturas: " + vaga.getQuantidadeDeCandidaturas());
+            System.out.println("Data Limite: " + vaga.getDataLimite().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+            System.out.println("Modalidade: " + vaga.getModalidade());
+        }
+    }
+
     public static void inscreverNaVaga(int idAluno) throws VagaJaExisteException{
         Listar();
         List<Vaga> vagas = new VagaRepositorio().listarVagas();

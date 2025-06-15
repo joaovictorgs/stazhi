@@ -29,9 +29,9 @@ public class Empresa extends Usuario {
         while (escolha!=3) {
             System.out.println("=== Menu da Empresa ===");
             System.out.println("1. Criar Vaga");
-            System.out.println("2. Editar Dados");
+            System.out.println("2. Ver suas Vagas");
             System.out.println("3. Sair");
-            System.out.print("Escolha uma opção: ");
+            System.out.print("Escolha uma opcao: ");
             escolha = scanner.nextInt();
             scanner.nextLine();
             switch (escolha) {
@@ -40,7 +40,7 @@ public class Empresa extends Usuario {
                     break;
                 }
                 case 2:
-                    System.out.println("2. Editar Dados");
+                    VagasCLI.Listar(id);
                     break;
                 case 3:
                     System.out.println("saindo");

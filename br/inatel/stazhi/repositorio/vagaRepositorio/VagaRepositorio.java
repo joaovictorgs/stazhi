@@ -107,4 +107,28 @@ public class VagaRepositorio implements GerenciadorComID<Vaga> {
             e.printStackTrace();
         }
     }
+
+    public List<Vaga> listarVagasPorEmpresa(int idEmpresa) {
+        String sql = "SELECT * FROM vagas WHERE empresas_id = ?";
+        List<Vaga> vagas = new ArrayList<>();
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, idEmpresa);
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                String descricao = rs.getString("descricao");
+                LocalDate dataLimite = rs.getDate("data_limite").toLocalDate();
+                int quantidadeDeCandidaturas = rs.getInt("quantidade_de_candidaturas");
+                String modalidadeStr = rs.getString("modalidade");
+                Modalidade modalidade = Modalidade.valueOf(modalidadeStr);
+
+                Vaga vaga = new Vaga(id, descricao, quantidadeDeCandidaturas, dataLimite, modalidade, idEmpresa);
+                vagas.add(vaga);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return vagas;
+    }
 }

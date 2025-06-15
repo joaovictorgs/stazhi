@@ -23,9 +23,9 @@ public class Aluno extends Usuario {
         while (escolha!=3) {
             System.out.println("=== Menu do Aluno ===");
             System.out.println("1. Visualizar Vagas");
-            System.out.println("2. Editar Dados");
+            System.out.println("2. Se inscrever na Vaga");
             System.out.println("3. Sair");
-            System.out.print("Escolha uma opção: ");
+            System.out.print("Escolha uma opcao: ");
             escolha = scanner.nextInt();
             switch (escolha) {
                 case 1:
