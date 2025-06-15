@@ -11,13 +11,15 @@ public class Vaga {
     private int quantidadeDeCandidaturas;
     private LocalDate  dataLimite;
     private Modalidade modalidade;
+    private int idEmpresa;
 
-    public Vaga(int id, String descricao, int quantidadeDeCandidaturas, LocalDate  dataLimite, Modalidade modalidade){
+    public Vaga(int id, String descricao, int quantidadeDeCandidaturas, LocalDate  dataLimite, Modalidade modalidade, int idEmpresa){
         this.id = id;
         this.descricao = descricao;
         this.quantidadeDeCandidaturas = quantidadeDeCandidaturas;
         this.dataLimite = dataLimite;
         this.modalidade = modalidade;
+        this.idEmpresa = idEmpresa;
     }
 
     public int getId(){
@@ -38,5 +40,9 @@ public class Vaga {
 
     public Modalidade getModalidade(){
         return this.modalidade;
+    }
+
+    public int getIdEmpresa(){
+        return this.idEmpresa;
     }
 }
