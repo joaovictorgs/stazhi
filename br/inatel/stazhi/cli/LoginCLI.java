@@ -11,6 +11,9 @@ import br.inatel.stazhi.casodeuso.empresa.CriarEmpresa;
 
 import br.inatel.stazhi.execoes.UsuarioJaExisteException.UsuarioJaExisteException;
 import br.inatel.stazhi.execoes.dadosInvalidosException.DadosInvalidosException;
+import br.inatel.stazhi.model.aluno.Aluno;
+import br.inatel.stazhi.model.empresa.Empresa;
+import br.inatel.stazhi.model.supervisor.Supervisor;
 import br.inatel.stazhi.model.usuario.Usuario;
 
 public class LoginCLI {
@@ -29,8 +32,7 @@ public class LoginCLI {
             case 1:
                 return login(scanner);
             case 2:
-                criarConta(scanner);
-                return null;
+                return criarConta(scanner);
             default:
                 System.out.println("Opcao invalida.");
                 return null;
@@ -101,21 +103,22 @@ public class LoginCLI {
             switch (tipo) {
                 case 1 -> {
                     new CriarAluno().executar(nome, senha, idade, formacao, email);
-                    Usuario usuario = new AutenticarAluno().executar(email, senha);
-                    System.out.println("✅ Conta criada com sucesso!");
-                    return usuario;
+                    Aluno aluno = new AutenticarAluno().executar(email, senha);
+                    
+                    System.out.println(aluno.getNome() + ", bem-vindo ao STAZHI!");
+                    return aluno;
                 }
                 case 2 -> {
                     new CriarSupervisor().executar(nome, senha, email, idade);
-                    Usuario usuario = new AutenticarSupervisor().executar(email, senha);
-                    System.out.println("✅ Conta criada com sucesso!");
-                    return usuario;
+                    Supervisor supervisor = new AutenticarSupervisor().executar(email, senha);
+                    System.out.println(supervisor.getNome() + ", bem-vindo ao STAZHI!");
+                    return supervisor;
                 }
                 case 3 -> {
                     new CriarEmpresa().executar(nome, cnpj, senha, email, setor);
-                    Usuario usuario = new AutenticarEmpresa().executar(email, senha);
-                    System.out.println("✅ Conta criada com sucesso!");
-                    return usuario;
+                    Empresa empresa = new AutenticarEmpresa().executar(email, senha);
+                    System.out.println(empresa.getNome() + ", bem-vindo ao STAZHI!");
+                    return empresa;
                 }
                 default -> {
                     System.out.println("Opcao invalida.");

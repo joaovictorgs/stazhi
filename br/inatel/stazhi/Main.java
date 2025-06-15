@@ -10,7 +10,11 @@ public class Main {
 
         if (usuario != null) {
             usuario.showMenu();
+        } else {
+            System.out.println("Nenhum usuario autenticado. Encerrando o programa.");
         }
+
+        System.out.println(" === Obrigado por usar o STAZHI! === ");
 
     }
 
