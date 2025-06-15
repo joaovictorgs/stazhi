@@ -3,6 +3,7 @@ package br.inatel.stazhi.util.validador;
 import java.util.regex.Pattern;
 
 import br.inatel.stazhi.execoes.CNPJInvalidoException.CNPJInvalidoException;
+import br.inatel.stazhi.execoes.dadosInvalidosException.DadosInvalidosException;
 
 public class Validador {
 
@@ -41,10 +42,13 @@ public class Validador {
         "^[\\w\\.-]+@[\\w\\.-]+\\.[a-zA-Z]{2,}$"
     );
 
-    public static boolean Email(String email) {
-        if (email == null) return false;
-        return EMAIL_REGEX.matcher(email).matches();
+    public static void Email(String email) throws DadosInvalidosException {
+        if (email == null) throw new DadosInvalidosException("Error, nenhum email foi escrito") ;
+
+        if(!EMAIL_REGEX.matcher(email).matches()) throw new DadosInvalidosException("Error, email não se encaixa no padrão xxx@email.com") ;
     }
+
+    
 
 
     private static int calcularDigito(String str, int[] pesos) {
