@@ -1,7 +1,14 @@
 package br.inatel.stazhi.model.empresa;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Locale;
 import java.util.Scanner;
 
+import br.inatel.stazhi.Enum.modalidade.Modalidade;
+import br.inatel.stazhi.casodeuso.empresa.CriarVaga;
 import br.inatel.stazhi.model.usuario.Usuario;
 
 public class Empresa extends Usuario {
@@ -20,15 +27,37 @@ public class Empresa extends Usuario {
         int escolha = 0;
         while (escolha!=3) {
             System.out.println("=== Menu da Empresa ===");
-            System.out.println("1. Visualizar Dados");
+            System.out.println("1. Criar Vaga");
             System.out.println("2. Editar Dados");
             System.out.println("3. Sair");
             System.out.print("Escolha uma opção: ");
             escolha = scanner.nextInt();
+            scanner.nextLine();
             switch (escolha) {
-                case 1:
-                    System.out.println("1. Visualizar Dados");
+                case 1:{
+                    System.out.println("Digite a descrição da vaga: ");
+                    String descricao = scanner.nextLine();
+                    System.out.println("Digite a data limite da vaga no estilo DD/MM/AAAA");
+                    String data = scanner.nextLine();
+                    LocalDate dataFinal = LocalDate.parse(data, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+                    System.out.println("Selecione a modalidade");
+                    int selecModalidade = scanner.nextInt();
+                    Modalidade modalidade;
+                    if(selecModalidade == 1){
+                        modalidade = Modalidade.presencial;
+                    }else if(selecModalidade == 2){
+                        modalidade = Modalidade.remoto;
+                    }else{
+                        modalidade = Modalidade.hibrido;
+                    }
+                    try {
+                    new CriarVaga().executar(id,descricao,dataFinal,modalidade );    
+                    } catch (Exception e) {
+                        System.out.println("ocorreu um erro "+ e.getMessage());
+                    }
+                    
                     break;
+                }
                 case 2:
                     System.out.println("2. Editar Dados");
                     break;
