@@ -18,12 +18,14 @@ public class EmpresaRepositorio implements GerenciadorComID<Empresa> {
 
     @Override
     public void criar(Empresa empresa) {
-        String sql = "INSERT INTO empresas (nome, email, senha, cnpj, setor) VALUES (?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO empresas (id, nome, cnpj, email, setor, senha) VALUES (?, ?, ?, ?, ?,?)";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
-            stmt.setString(1, empresa.getNome());
-            stmt.setString(2, empresa.getEmail());
-            stmt.setString(3, empresa.getSenha());
-            stmt.setString(4, empresa.getCNPJ());
+            stmt.setInt(1, empresa.getId());
+            stmt.setString(2, empresa.getNome());
+            stmt.setString(3, empresa.getCNPJ());
+            stmt.setString(4, empresa.getEmail());
+            stmt.setString(5, empresa.getSetor());
+            stmt.setString(6, empresa.getSenha());
             stmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();

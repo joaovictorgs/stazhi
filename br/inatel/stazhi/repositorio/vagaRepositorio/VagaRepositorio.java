@@ -19,12 +19,13 @@ public class VagaRepositorio implements GerenciadorComID<Vaga> {
 
     @Override
     public void criar(Vaga vaga) {
-        String sql = "INSERT INTO vagas (descricao, quantidade_de_candidaturas, data_limite, modalidade) VALUES (?, ?, ?, ?)";
+        String sql = "INSERT INTO vagas (descricao, quantidade_de_candidaturas, data_limite, modalidade, empresas_id) VALUES (?, ?, ?, ?,?)";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, vaga.getDescricao());
             stmt.setInt(2, vaga.getQuantidadeDeCandidaturas());
             stmt.setDate(3, java.sql.Date.valueOf(vaga.getDataLimite()));
             stmt.setString(4, vaga.getModalidade().toString());
+            stmt.setInt(5, vaga.getIdEmpresa());
             stmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -43,8 +44,9 @@ public class VagaRepositorio implements GerenciadorComID<Vaga> {
                 int quantidadeDeCandidaturas = rs.getInt("quantidade_de_candidaturas");
                 String modalidadeStr = rs.getString("modalidade");
                 Modalidade modalidade = Modalidade.valueOf(modalidadeStr);
+                int idEmpresa = rs.getInt("empresas_id"); 
 
-                return new Vaga(id, descricao, quantidadeDeCandidaturas, dataLimite, modalidade);
+                return new Vaga(id, descricao, quantidadeDeCandidaturas, dataLimite, modalidade, idEmpresa);
             }
         } catch (SQLException e) {
             e.printStackTrace();
