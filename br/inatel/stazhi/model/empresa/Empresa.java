@@ -13,21 +13,12 @@ public class Empresa extends Usuario {
     }
 
     @Override
-    public void login(String email, String senha) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'login'");
-    }
-
-    @Override
-    public void cadastro(String email, String senha) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'cadastro'");
-    }
-
-    @Override
     public void showMenu() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'showMenu'");
+        System.out.println("=== Menu da Empresa ===");
+        System.out.println("1. Visualizar Dados");
+        System.out.println("2. Editar Dados");
+        System.out.println("3. Sair");
+        System.out.print("Escolha uma opção: ");
     }
     
     public String getNome(){

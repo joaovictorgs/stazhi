@@ -1,8 +1,6 @@
 package br.inatel.stazhi.model.usuario;
 
-import br.inatel.stazhi.interfaces.autenticavel.Autenticavel;
-
-public abstract class Usuario implements Autenticavel{
+public abstract class Usuario{
     protected String nome;
     protected String senha;
     protected String email;

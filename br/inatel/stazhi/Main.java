@@ -1,19 +1,17 @@
 package br.inatel.stazhi;
 
-import java.sql.SQLException;
-
-import br.inatel.stazhi.util.dbConexao.DBConexao;
+import br.inatel.stazhi.cli.LoginCLI;
+import br.inatel.stazhi.model.usuario.Usuario;
 
 public class Main {
     public static void main(String[] args) {
-        try {
-            var conexao = DBConexao.getConnection();
-        } catch (ClassNotFoundException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        } catch (SQLException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+       
+        Usuario usuario = LoginCLI.iniciar();
+
+        if (usuario != null) {
+            usuario.showMenu();
         }
+
     }
+
 }

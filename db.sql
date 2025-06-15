@@ -6,6 +6,7 @@ CREATE TABLE IF NOT EXISTS supervisor (
     nome VARCHAR(45) NOT NULL,
     idade INTEGER NOT NULL,
     email VARCHAR(45) NOT NULL UNIQUE
+    senha VARCHAR(45) NOT NULL,
 );
 
 -- Criar índices únicos
@@ -19,7 +20,8 @@ CREATE TABLE IF NOT EXISTS empresas (
     nome VARCHAR(45) NOT NULL,
     cnpj VARCHAR(45) NOT NULL UNIQUE,
     email VARCHAR(45) NOT NULL UNIQUE,
-    setor VARCHAR(180) NOT NULL
+    setor VARCHAR(180) NOT NULL,
+    senha VARCHAR(45) NOT NULL
 );
 
 -- Criar índices únicos
@@ -37,6 +39,7 @@ CREATE TABLE IF NOT EXISTS alunos (
     idade INTEGER NOT NULL,
     supervisor_id INTEGER,
     empresas_id INTEGER,
+    senha VARCHAR(45) NOT NULL
     CONSTRAINT fk_alunos_supervisor 
         FOREIGN KEY (supervisor_id) 
         REFERENCES supervisor (id) 

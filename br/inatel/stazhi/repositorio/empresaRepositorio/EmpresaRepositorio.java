@@ -73,4 +73,37 @@ public class EmpresaRepositorio implements GerenciadorComID<Empresa> {
             e.printStackTrace();
         }
     } 
-  }
+
+    public Empresa buscarPorEmail(String email) {
+        String sql = "SELECT * FROM empresas WHERE email = ?";
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, email);
+            var rs = stmt.executeQuery();
+            if (rs.next()) {
+                int id = rs.getInt("id");
+                String nome = rs.getString("nome");
+                String senha = rs.getString("senha");
+                String cnpj = rs.getString("cnpj");
+                String setor = rs.getString("setor");
+                return new Empresa(id, nome, senha, email, cnpj, setor);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public boolean existePorCNPJ(String cnpj) {
+        String sql = "SELECT COUNT(*) FROM empresas WHERE cnpj = ?";
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, cnpj);
+            var rs = stmt.executeQuery();
+            if (rs.next()) {
+                return rs.getInt(1) > 0;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+}

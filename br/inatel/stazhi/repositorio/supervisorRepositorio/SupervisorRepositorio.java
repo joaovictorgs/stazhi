@@ -72,4 +72,35 @@ public class SupervisorRepositorio implements GerenciadorComID<Supervisor> {
         }
     }
 
-  }
+    public Supervisor buscarPorEmail(String email) {
+        String sql = "SELECT * FROM supervisores WHERE email = ?";
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, email);
+            var rs = stmt.executeQuery();
+            if (rs.next()) {
+                int id = rs.getInt("id");
+                String nome = rs.getString("nome");
+                String senha = rs.getString("senha");
+                int idade = rs.getInt("idade");
+                return new Supervisor(id, nome, senha, email, idade);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public boolean existePorEmail(String email) {
+        String sql = "SELECT COUNT(*) FROM supervisores WHERE email = ?";
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, email);
+            var rs = stmt.executeQuery();
+            if (rs.next()) {
+                return rs.getInt(1) > 0;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+}
