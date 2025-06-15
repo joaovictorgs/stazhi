@@ -9,6 +9,7 @@ import java.util.Scanner;
 
 import br.inatel.stazhi.Enum.modalidade.Modalidade;
 import br.inatel.stazhi.casodeuso.empresa.CriarVaga;
+import br.inatel.stazhi.cli.VagasCLI;
 import br.inatel.stazhi.model.usuario.Usuario;
 
 public class Empresa extends Usuario {
@@ -35,27 +36,7 @@ public class Empresa extends Usuario {
             scanner.nextLine();
             switch (escolha) {
                 case 1:{
-                    System.out.println("Digite a descrição da vaga: ");
-                    String descricao = scanner.nextLine();
-                    System.out.println("Digite a data limite da vaga no estilo DD/MM/AAAA");
-                    String data = scanner.nextLine();
-                    LocalDate dataFinal = LocalDate.parse(data, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-                    System.out.println("Selecione a modalidade");
-                    int selecModalidade = scanner.nextInt();
-                    Modalidade modalidade;
-                    if(selecModalidade == 1){
-                        modalidade = Modalidade.presencial;
-                    }else if(selecModalidade == 2){
-                        modalidade = Modalidade.remoto;
-                    }else{
-                        modalidade = Modalidade.hibrido;
-                    }
-                    try {
-                    new CriarVaga().executar(id,descricao,dataFinal,modalidade );    
-                    } catch (Exception e) {
-                        System.out.println("ocorreu um erro "+ e.getMessage());
-                    }
-                    
+                    VagasCLI.Criar(id);
                     break;
                 }
                 case 2:
