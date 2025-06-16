@@ -2,6 +2,8 @@ package br.inatel.stazhi.repositorio.candidaturaRepositorio;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.util.ArrayList;
+import java.util.List;
 
 import br.inatel.stazhi.interfaces.gerenciadorDeDados.GerenciadorDeDados;
 import br.inatel.stazhi.model.candidatura.Candidatura;
@@ -80,5 +82,22 @@ public class CandidaturaRepositorio implements GerenciadorDeDados<Candidatura> {
 
         }
         return false;
+    }
+
+    public List<Candidatura> listarCandidaturasPorVaga(int idVaga) {
+        String sql = "SELECT * FROM candidaturas WHERE vagas_id = ?";
+        List<Candidatura> candidaturas = new ArrayList<>();
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, idVaga);
+            var rs = stmt.executeQuery();
+            while (rs.next()) {
+                int vagaId = rs.getInt("vagas_id");
+                int alunoId = rs.getInt("alunos_id");
+                candidaturas.add(new Candidatura(vagaId, alunoId));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return candidaturas;
     }
 }
