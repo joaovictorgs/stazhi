@@ -1,14 +1,7 @@
 package br.inatel.stazhi.model.empresa;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.Locale;
 import java.util.Scanner;
 
-import br.inatel.stazhi.Enum.modalidade.Modalidade;
-import br.inatel.stazhi.casodeuso.empresa.CriarVaga;
 import br.inatel.stazhi.cli.VagasCLI;
 import br.inatel.stazhi.model.usuario.Usuario;
 
