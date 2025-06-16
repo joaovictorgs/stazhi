@@ -7,9 +7,9 @@ import java.util.Scanner;
 
 import br.inatel.stazhi.Enum.modalidade.Modalidade;
 import br.inatel.stazhi.casodeuso.candidatura.CriarCandidatura;
+import br.inatel.stazhi.casodeuso.candidatura.AprovarCandidatura;
 import br.inatel.stazhi.casodeuso.empresa.CriarVaga;
 import br.inatel.stazhi.execoes.vagaJaExisteException.VagaJaExisteException;
-import br.inatel.stazhi.model.empresa.Empresa;
 import br.inatel.stazhi.model.vaga.Vaga;
 import br.inatel.stazhi.repositorio.vagaRepositorio.VagaRepositorio;
 import br.inatel.stazhi.model.candidatura.Candidatura;
@@ -116,8 +116,9 @@ public class VagasCLI {
             System.out.println("Email: " + (candidato != null ? candidato.getEmail() : "Desconhecido"));
         }
         while (true) {
-            System.out.println("\nDigite o número do candidato para ver detalhes (0 para voltar): ");
+            System.out.println("\nDigite o número do candidato para ver detalhes ou aprovar (0 para voltar): ");
             int candidatoSelecionado = scanner.nextInt();
+            scanner.nextLine(); // Consume newline
             if (candidatoSelecionado == 0) {
                 break;
             }
@@ -129,6 +130,17 @@ public class VagasCLI {
                     System.out.println("ID: " + candidatura.getAlunoId());
                     System.out.println("Nome: " + candidato.getNome());
                     System.out.println("Email: " + candidato.getEmail());
+                    System.out.println("\nDeseja aprovar este candidato? (s/n): ");
+                    String resposta = scanner.nextLine().trim().toLowerCase();
+                    if (resposta.equals("s")) {
+                        try {
+                            new AprovarCandidatura().executar(candidatura.getAlunoId(), idVaga);
+                            System.out.println("Candidato aprovado com sucesso! Todas as candidaturas para esta vaga foram excluídas.");
+                            break; // Exit candidate selection loop after approval
+                        } catch (Exception e) {
+                            System.out.println("Erro ao aprovar candidato: " + e.getMessage());
+                        }
+                    }
                 } else {
                     System.out.println("Candidato não encontrado.");
                 }

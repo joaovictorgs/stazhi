@@ -26,11 +26,10 @@ public class CandidaturaRepositorio implements GerenciadorDeDados<Candidatura> {
             stmt.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();    
-
         }
     }
 
-   public Candidatura carregarPorIds(int vagaId, int alunoId) {
+    public Candidatura carregarPorIds(int vagaId, int alunoId) {
         String sql = "SELECT * FROM candidaturas WHERE vagas_id = ? AND alunos_id = ?";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setInt(1, vagaId);
@@ -57,7 +56,7 @@ public class CandidaturaRepositorio implements GerenciadorDeDados<Candidatura> {
         }
     }
 
-   public void deletarPorIds(int vagaId, int alunoId) {
+    public void deletarPorIds(int vagaId, int alunoId) {
         String sql = "DELETE FROM candidaturas WHERE vagas_id = ? AND alunos_id = ?";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setInt(1, vagaId);
@@ -68,20 +67,27 @@ public class CandidaturaRepositorio implements GerenciadorDeDados<Candidatura> {
         }
     }
 
-    public boolean existePorId(int vagaId, int alunoId){
+    public void deletarPorVaga(int vagaId) {
+        String sql = "DELETE FROM candidaturas WHERE vagas_id = ?";
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, vagaId);
+            stmt.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public boolean existePorId(int vagaId, int alunoId) {
         String sql = "SELECT * FROM candidaturas WHERE vagas_id = ? AND alunos_id = ?";
-        try(PreparedStatement stmt = conn.prepareStatement(sql)){
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setInt(1, vagaId);
             stmt.setInt(2, alunoId);
             var rs = stmt.executeQuery();
-            if (rs.next()) {
-                return rs.getInt(1) > 0;
-            }
+            return rs.next();
         } catch (Exception e) {
             e.printStackTrace();
-
+            return false;
         }
-        return false;
     }
 
     public List<Candidatura> listarCandidaturasPorVaga(int idVaga) {
