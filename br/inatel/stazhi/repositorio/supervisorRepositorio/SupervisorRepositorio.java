@@ -18,7 +18,7 @@ public class SupervisorRepositorio implements GerenciadorComID<Supervisor> {
 
     @Override
     public void criar(Supervisor supervisor) {
-        String sql = "INSERT INTO supervisores (nome, email, senha, idade) VALUES (?, ?, ?, ?)";
+        String sql = "INSERT INTO supervisor (nome, email, senha, idade) VALUES (?, ?, ?, ?)";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, supervisor.getNome());
             stmt.setString(2, supervisor.getEmail());
@@ -31,7 +31,7 @@ public class SupervisorRepositorio implements GerenciadorComID<Supervisor> {
     }
     @Override
     public Supervisor carregar(int id) {
-        String sql = "SELECT * FROM supervisores WHERE id = ?";
+        String sql = "SELECT * FROM supervisor WHERE id = ?";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setInt(1, id);
             var rs = stmt.executeQuery();
@@ -49,7 +49,7 @@ public class SupervisorRepositorio implements GerenciadorComID<Supervisor> {
     }
     @Override
     public void atualizar(Supervisor supervisor) {
-        String sql = "UPDATE supervisores SET nome = ?, email = ?, senha = ?, area = ? WHERE id = ?";
+        String sql = "UPDATE supervisor SET nome = ?, email = ?, senha = ?, area = ? WHERE id = ?";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, supervisor.getNome());
             stmt.setString(2, supervisor.getEmail());
@@ -63,7 +63,7 @@ public class SupervisorRepositorio implements GerenciadorComID<Supervisor> {
     }
     @Override
     public void deletar(int id) {
-        String sql = "DELETE FROM supervisores WHERE id = ?";
+        String sql = "DELETE FROM supervisor WHERE id = ?";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setInt(1, id);
             stmt.executeUpdate();
@@ -73,7 +73,7 @@ public class SupervisorRepositorio implements GerenciadorComID<Supervisor> {
     }
 
     public Supervisor buscarPorEmail(String email) {
-        String sql = "SELECT * FROM supervisores WHERE email = ?";
+        String sql = "SELECT * FROM supervisor WHERE email = ?";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, email);
             var rs = stmt.executeQuery();
@@ -91,7 +91,7 @@ public class SupervisorRepositorio implements GerenciadorComID<Supervisor> {
     }
 
     public boolean existePorEmail(String email) {
-        String sql = "SELECT COUNT(*) FROM supervisores WHERE email = ?";
+        String sql = "SELECT COUNT(*) FROM supervisor WHERE email = ?";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, email);
             var rs = stmt.executeQuery();
