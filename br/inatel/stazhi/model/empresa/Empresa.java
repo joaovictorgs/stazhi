@@ -43,6 +43,7 @@ public class Empresa extends Usuario {
                     break;
             }
         }
+        scanner.close();
     }
     
     public String getNome(){
