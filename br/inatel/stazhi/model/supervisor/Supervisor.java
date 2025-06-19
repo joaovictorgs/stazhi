@@ -25,16 +25,19 @@ public class Supervisor extends Usuario {
         System.out.print("Escolha uma opção: ");
         escolha = scanner.nextInt();
             switch (escolha) {
-                case 1:
-                    System.out.println("1. Visualizar alunos ");
+                case 1:{
+                    SupervisionamentoCLI.ListarAlunosSupervisionados(id);
                     break;
-                case 2:
+                }
+                case 2:{
                     SupervisionamentoCLI.AdicionarAlunoSupervisionado(id);
                     break;
-                case 3:
+                }
+                case 3:{
                     System.out.println("saindo");
                     break;
-                default:
+                }
+             default:
                     System.out.println("Insira um dos valores especificados");
                     break;
             }
