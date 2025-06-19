@@ -2,6 +2,7 @@ package br.inatel.stazhi.model.supervisor;
 
 import java.util.Scanner;
 
+import br.inatel.stazhi.cli.SupervisionamentoCLI;
 import br.inatel.stazhi.model.usuario.Usuario;
 
 public class Supervisor extends Usuario {
@@ -18,17 +19,17 @@ public class Supervisor extends Usuario {
         int escolha = 0;
         while (escolha!=3) {
         System.out.println("=== Menu do Supervisor ===");
-        System.out.println("1. Visualizar Dados");
-        System.out.println("2. Editar Dados");
+        System.out.println("1. verificar meus alunos");
+        System.out.println("2. adicionar Alunos");
         System.out.println("3. Sair");
         System.out.print("Escolha uma opção: ");
         escolha = scanner.nextInt();
             switch (escolha) {
                 case 1:
-                    System.out.println("1. Visualizar Dados");
+                    System.out.println("1. Visualizar alunos ");
                     break;
                 case 2:
-                    System.out.println("2. Editar Dados");
+                    SupervisionamentoCLI.AdicionarAlunoSupervisionado(id);
                     break;
                 case 3:
                     System.out.println("saindo");
@@ -38,6 +39,7 @@ public class Supervisor extends Usuario {
                     break;
             }
         }
+        scanner.close();
     }
     
     public String getNome(){
