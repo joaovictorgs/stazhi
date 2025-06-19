@@ -18,12 +18,13 @@ public class SupervisorRepositorio implements GerenciadorComID<Supervisor> {
 
     @Override
     public void criar(Supervisor supervisor) {
-        String sql = "INSERT INTO supervisor (nome, email, senha, idade) VALUES (?, ?, ?, ?)";
+        String sql = "INSERT INTO supervisor (id, nome, email, senha, idade) VALUES (?, ?, ?, ?, ?)";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
-            stmt.setString(1, supervisor.getNome());
-            stmt.setString(2, supervisor.getEmail());
-            stmt.setString(3, supervisor.getSenha());
-            stmt.setInt(4, supervisor.getIdade());
+            stmt.setInt(1, supervisor.getId());
+            stmt.setString(2, supervisor.getNome());
+            stmt.setString(3, supervisor.getEmail());
+            stmt.setString(4, supervisor.getSenha());
+            stmt.setInt(5, supervisor.getIdade());
             stmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
