@@ -185,4 +185,19 @@ public class AlunoRepositorio implements GerenciadorComID<Aluno> {
         }
         return false;
     }
+
+    public void removerSupervisor(int alunoID, int supervisorId){
+        String sql = "UPDATE alunos SET supervisor_id = NULL WHERE id = ? AND supervisor_id = ?";
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, alunoID);
+            stmt.setInt(2, supervisorId);
+            int rowsAffected = stmt.executeUpdate();
+            if (rowsAffected == 0) {
+                throw new SQLException("Aluno com ID " + alunoID + " não encontrado.");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new RuntimeException("Erro ao atualizar supervisor_id para o aluno: " + e.getMessage());
+        }
+    }
 }
