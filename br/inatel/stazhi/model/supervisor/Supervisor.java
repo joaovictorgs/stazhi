@@ -17,11 +17,12 @@ public class Supervisor extends Usuario {
     public void showMenu() {
         Scanner scanner = new Scanner(System.in);
         int escolha = 0;
-        while (escolha!=3) {
+        while (escolha!=4) {
         System.out.println("=== Menu do Supervisor ===");
-        System.out.println("1. verificar meus alunos");
-        System.out.println("2. adicionar Alunos");
-        System.out.println("3. Sair");
+        System.out.println("1. Verificar meus alunos");
+        System.out.println("2. Adicionar alunos pra supervisionar");
+        System.out.println("3. Remover aluno supervisionado");
+        System.out.println("4. Sair");
         System.out.print("Escolha uma opção: ");
         escolha = scanner.nextInt();
             switch (escolha) {
@@ -34,6 +35,10 @@ public class Supervisor extends Usuario {
                     break;
                 }
                 case 3:{
+                    SupervisionamentoCLI.PararDeSupervisionar(id);
+                    break;
+                }
+                case 4:{
                     System.out.println("saindo");
                     break;
                 }
