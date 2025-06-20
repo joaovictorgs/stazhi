@@ -21,26 +21,38 @@ public class GerenciarmentoEstagiariosCLI {
 
         if (estagiarios.isEmpty()) {
             System.out.println("Nenhum estagiário encontrado para a empresa com ID: " + idEmpresa);
-           
             return;
         }
 
         System.out.println("Estagiários associados à empresa com ID: " + idEmpresa);
-        for (Aluno estagiario : estagiarios) {
-            System.out.println("ID: " + estagiario.getId() + ", Nome: " + estagiario.getNome() + ", Email: " + estagiario.getEmail());
+        for (int i = 0; i < estagiarios.size(); i++) {
+            Aluno estagiario = estagiarios.get(i);
+            System.out.println("[" + (i + 1) + "] ID: " + estagiario.getId()
+                    + ", Nome: " + estagiario.getNome()
+                    + ", Email: " + estagiario.getEmail());
         }
 
-        System.out.println("\nDeseja remover algum estagiário? (s/n): ");
-        String resposta = scanner.nextLine().trim().toLowerCase();
+        System.out.println("\nDeseja remover algum estagiário?");
+        System.out.println("Digite o número correspondente ao estagiário (ou 0 para voltar): ");
+        int escolha = -1;
 
-        if (resposta.equals("s")) {
-            System.out.print("Digite o ID do estagiário que deseja remover: ");
-            int idEstagiario = scanner.nextInt();
-            scanner.nextLine();
-
-            removerEstagiario.executar(idEstagiario);
-            System.out.println("Estagiário com ID " + idEstagiario + " foi removido da empresa.");
+        try {
+            escolha = Integer.parseInt(scanner.nextLine());
+        } catch (NumberFormatException e) {
+            System.out.println("Entrada inválida. Operacao cancelada.");
         }
+
+        if (escolha == 0) {
+            System.out.println("Nenhum estagiário foi removido.");
+        }
+
+        if (escolha < 1 || escolha > estagiarios.size()) {
+            System.out.println("Indice fora do intervalo. Operacao cancelada.");
+        }
+
+        Aluno selecionado = estagiarios.get(escolha - 1);
+        removerEstagiario.executar(selecionado.getId());
+        System.out.println("Estagiário " + selecionado.getNome() + " foi removido da empresa.");
     }
 
     public static void VerEmpresa(int alunoId) {

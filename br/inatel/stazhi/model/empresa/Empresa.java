@@ -20,11 +20,11 @@ public class Empresa extends Usuario {
     public void showMenu() {
         Scanner scanner = new Scanner(System.in);
         int escolha = 0;
-        while (escolha!=3) {
+        while (escolha!=4) {
             System.out.println("=== Menu da Empresa ===");
             System.out.println("1. Criar Vaga");
             System.out.println("2. Ver suas Vagas");
-            System.out.println("3. Ver estagiários");
+            System.out.println("3. Ver estagiarios");
             System.out.println("4. Sair");
             System.out.print("Escolha uma opcao: ");
             escolha = scanner.nextInt();
