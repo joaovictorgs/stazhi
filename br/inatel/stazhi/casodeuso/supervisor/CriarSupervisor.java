@@ -7,7 +7,7 @@ import br.inatel.stazhi.util.geradorDeId.GeradorDeId;
 
 public class CriarSupervisor {
     public void executar(String nome, String senha, String email, int idade) throws UsuarioJaExisteException {
-        var repo = new SupervisorRepositorio();
+        SupervisorRepositorio repo = new SupervisorRepositorio();
 
         if (repo.existePorEmail(email)) {
             throw new UsuarioJaExisteException("Já existe um supervisor com esse email.");
