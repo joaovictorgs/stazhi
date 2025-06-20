@@ -44,6 +44,7 @@ public class GerenciarmentoEstagiariosCLI {
 
         if (escolha == 0) {
             System.out.println("Nenhum estagiário foi removido.");
+            return;
         }
 
         if (escolha < 1 || escolha > estagiarios.size()) {
