@@ -15,7 +15,7 @@ public class AutenticarEmpresa {
     public Empresa executar(String email, String senha) throws DadosInvalidosException {
         Empresa empresa = empresaRepositorio.buscarPorEmail(email);
 
-        if (empresa == null || !empresa.getEmail().equals(email)) {
+        if (empresa == null || !empresa.getSenha().equals(senha)) {
             throw new DadosInvalidosException( "Senha inválida ou empresa não encontrada.");
         }
 
