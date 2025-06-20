@@ -200,4 +200,42 @@ public class AlunoRepositorio implements GerenciadorComID<Aluno> {
             throw new RuntimeException("Erro ao atualizar supervisor_id para o aluno: " + e.getMessage());
         }
     }
+
+    public List<Aluno> listarEstagiariosPorEmpresa(int idEmpresa) {
+        String sql = "SELECT * FROM alunos WHERE empresas_id = ?";
+        List<Aluno> alunos = new ArrayList<>();
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, idEmpresa);
+            var rs = stmt.executeQuery();
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                String nome = rs.getString("nome");
+                String email = rs.getString("email");
+                String senha = rs.getString("senha");
+                String formacao = rs.getString("formacao");
+                int idade = rs.getInt("idade");
+                Aluno aluno = new Aluno(id, nome, senha, idade, formacao, email);
+                alunos.add(aluno);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return alunos;
+    }
+
+    public void removerEstagiario(int alunoId) {
+        String sql = "UPDATE alunos SET empresas_id = NULL WHERE id = ?";
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, alunoId);
+            int rowsAffected = stmt.executeUpdate();
+            if (rowsAffected == 0) {
+                throw new SQLException("Aluno com ID " + alunoId + " não encontrado ou já está sem empresa.");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new RuntimeException("Erro ao remover empresa do aluno: " + e.getMessage());
+        }
+    }
+
 }
+
