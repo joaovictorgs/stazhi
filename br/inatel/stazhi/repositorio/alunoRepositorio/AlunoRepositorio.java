@@ -8,6 +8,7 @@ import java.util.List;
 
 import br.inatel.stazhi.interfaces.gerenciadorComId.GerenciadorComID;
 import br.inatel.stazhi.model.aluno.Aluno;
+import br.inatel.stazhi.model.supervisor.Supervisor;
 import br.inatel.stazhi.util.dbConexao.DBConexao;
 
 public class AlunoRepositorio implements GerenciadorComID<Aluno> {
@@ -73,6 +74,25 @@ public class AlunoRepositorio implements GerenciadorComID<Aluno> {
             e.printStackTrace();
         }
         return alunos;
+    }
+
+    public Supervisor buscaSupervisor(int alunoId){
+        String sql = "SELECT * FROM supervisor s JOIN alunos a on s.id = a.supervisor_id WHERE a.id = ?";
+        try (PreparedStatement stmt = conn.prepareStatement(sql)){ ;
+            stmt.setInt(1, alunoId);
+            var rs = stmt.executeQuery();
+            if (rs.next()) {
+                int id =  rs.getInt("id");
+                String nome = rs.getString("nome");
+                String email = rs.getString("email");
+                String senha = rs.getString("senha");
+                int idade = rs.getInt("idade");
+                return new Supervisor(id,nome,senha,email,idade);
+            }
+        }catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     public List<Aluno> listarSupervisionadosPorUmId(int supervisorId){

@@ -2,6 +2,7 @@ package br.inatel.stazhi.model.aluno;
 
 import java.util.Scanner;
 
+import br.inatel.stazhi.cli.SupervisionamentoCLI;
 import br.inatel.stazhi.cli.VagasCLI;
 import br.inatel.stazhi.execoes.vagaJaExisteException.VagaJaExisteException;
 import br.inatel.stazhi.model.usuario.Usuario;
@@ -20,11 +21,13 @@ public class Aluno extends Usuario {
     public void showMenu() {
         Scanner scanner = new Scanner(System.in);
         int escolha = 0;
-        while (escolha!=3) {
+        while (escolha!=5) {
             System.out.println("=== Menu do Aluno ===");
             System.out.println("1. Visualizar Vagas");
-            System.out.println("2. Se inscrever na Vaga");
-            System.out.println("3. Sair");
+            System.out.println("2. Se Inscrever na Vaga");
+            System.out.println("3. Visualizar Supervisor");
+            System.out.println("4. Visualizar Empresa");
+            System.out.println("5. Sair");
             System.out.print("Escolha uma opcao: ");
             escolha = scanner.nextInt();
             switch (escolha) {
@@ -40,6 +43,12 @@ public class Aluno extends Usuario {
                     }
                     break;
                 case 3:
+                    SupervisionamentoCLI.BuscarSupervisorPorAlunoId(this.id);
+                    break;
+                case 4:
+                    System.out.println("saindo");
+                    break;
+                case 5:
                     System.out.println("saindo");
                     break;
                 default:
