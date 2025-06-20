@@ -47,6 +47,8 @@ public class Aluno extends Usuario {
                     break;
             }
         }
+
+        scanner.close();
     }
 
     public String getNome(){

@@ -2,6 +2,7 @@ package br.inatel.stazhi.model.empresa;
 
 import java.util.Scanner;
 
+import br.inatel.stazhi.cli.GerenciarmentoEstagiariosCLI;
 import br.inatel.stazhi.cli.VagasCLI;
 import br.inatel.stazhi.model.usuario.Usuario;
 
@@ -23,7 +24,9 @@ public class Empresa extends Usuario {
             System.out.println("=== Menu da Empresa ===");
             System.out.println("1. Criar Vaga");
             System.out.println("2. Ver suas Vagas");
-            System.out.println("3. Sair");
+            System.out.println("3. Ver estagiários");
+            System.out.println("4. Remover estagiário");
+            System.out.println("5. Sair");
             System.out.print("Escolha uma opcao: ");
             escolha = scanner.nextInt();
             scanner.nextLine();
@@ -36,6 +39,12 @@ public class Empresa extends Usuario {
                     VagasCLI.Listar(id);
                     break;
                 case 3:
+                    GerenciarmentoEstagiariosCLI.VerEstagiarios(id);
+                    break;
+                case 4:
+                    GerenciarmentoEstagiariosCLI.RemoverEstagiario(id);
+                    break;
+                case 5:
                     System.out.println("saindo");
                     break;
                 default:

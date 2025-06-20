@@ -37,6 +37,7 @@ public class VagasCLI {
             modalidade = Modalidade.hibrido;
         } else { 
             System.out.println("Valor de modalidade não está correto");
+            scanner.close();
             return;
         }
         try {
@@ -45,6 +46,8 @@ public class VagasCLI {
         } catch (Exception e) {
             System.out.println("ocorreu um erro " + e.getMessage());
         }
+
+        scanner.close();
     }
 
     public static void Listar() {
@@ -95,6 +98,8 @@ public class VagasCLI {
                 System.out.println("Número de vaga inválido.");
             }
         }
+
+         scanner.close();
     }
 
     private static void mostrarCandidatos(int idVaga) {
@@ -147,7 +152,10 @@ public class VagasCLI {
             } else {
                 System.out.println("Número de candidato inválido.");
             }
+            
         }
+
+        scanner.close();
     }
 
     public static void inscreverNaVaga(int idAluno) throws VagaJaExisteException {
@@ -164,8 +172,11 @@ public class VagasCLI {
             new CriarCandidatura().executar(idAluno, idVaga);
         } else {
             System.out.println("Valor inválido");
+            scanner.close();
             return;
         }
         System.out.println("Candidatou com sucesso na vaga");
+
+        scanner.close();
     }
 }

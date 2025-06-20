@@ -1,6 +1,5 @@
 package br.inatel.stazhi.casodeuso.candidatura;
 
-import br.inatel.stazhi.execoes.UsuarioJaExisteException.UsuarioJaExisteException;
 import br.inatel.stazhi.execoes.vagaJaExisteException.VagaJaExisteException;
 import br.inatel.stazhi.model.candidatura.Candidatura;
 import br.inatel.stazhi.repositorio.candidaturaRepositorio.CandidaturaRepositorio;
