@@ -55,8 +55,6 @@ public class SupervisionamentoCLI {
                 System.out.println("Insira um valor valido");
             }
         }
-
-        scanner.close();
     }
 
     public static void ListarAlunosSupervisionados(int supervisorId){
@@ -96,7 +94,7 @@ public class SupervisionamentoCLI {
             }
         }
 
-        scanner.close();
+        
     }
 
     public static void PararDeSupervisionar(int supervisorId){
@@ -143,7 +141,7 @@ public class SupervisionamentoCLI {
             }
         }
 
-        scanner.close();
+        
         
     }
 

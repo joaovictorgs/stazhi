@@ -18,7 +18,7 @@ public class GerenciarmentoEstagiariosCLI {
 
         if (estagiarios.isEmpty()) {
             System.out.println("Nenhum estagiário encontrado para a empresa com ID: " + idEmpresa);
-            scanner.close();
+           
             return;
         }
 
@@ -38,7 +38,5 @@ public class GerenciarmentoEstagiariosCLI {
             removerEstagiario.executar(idEstagiario);
             System.out.println("Estagiário com ID " + idEstagiario + " foi removido da empresa.");
         }
-
-      scanner.close();
     }
 }
