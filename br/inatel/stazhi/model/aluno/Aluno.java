@@ -2,6 +2,7 @@ package br.inatel.stazhi.model.aluno;
 
 import java.util.Scanner;
 
+import br.inatel.stazhi.cli.GerenciarmentoEstagiariosCLI;
 import br.inatel.stazhi.cli.SupervisionamentoCLI;
 import br.inatel.stazhi.cli.VagasCLI;
 import br.inatel.stazhi.execoes.vagaJaExisteException.VagaJaExisteException;
@@ -46,7 +47,7 @@ public class Aluno extends Usuario {
                     SupervisionamentoCLI.BuscarSupervisorPorAlunoId(this.id);
                     break;
                 case 4:
-                    System.out.println("saindo");
+                    GerenciarmentoEstagiariosCLI.VerEmpresa(this.id);
                     break;
                 case 5:
                     System.out.println("saindo");
