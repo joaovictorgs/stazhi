@@ -8,6 +8,7 @@ import java.util.List;
 
 import br.inatel.stazhi.interfaces.gerenciadorComId.GerenciadorComID;
 import br.inatel.stazhi.model.aluno.Aluno;
+import br.inatel.stazhi.model.empresa.Empresa;
 import br.inatel.stazhi.model.supervisor.Supervisor;
 import br.inatel.stazhi.util.dbConexao.DBConexao;
 
@@ -88,6 +89,26 @@ public class AlunoRepositorio implements GerenciadorComID<Aluno> {
                 String senha = rs.getString("senha");
                 int idade = rs.getInt("idade");
                 return new Supervisor(id,nome,senha,email,idade);
+            }
+        }catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public Empresa buscaEmpresa(int alunoId){
+        String sql = "SELECT * FROM empresas e JOIN alunos a on e.id = a.empresas_id WHERE a.id = ?";
+        try (PreparedStatement stmt = conn.prepareStatement(sql)){ ;
+            stmt.setInt(1, alunoId);
+            var rs = stmt.executeQuery();
+            if (rs.next()) {
+                int id =  rs.getInt("id");
+                String nome = rs.getString("nome");
+                String email = rs.getString("email");
+                String CNPJ = rs.getString("cnpj");
+                String senha = rs.getString("senha");
+                String setor = rs.getString("setor");
+                return new Empresa(id,nome,senha,email,CNPJ, setor);
             }
         }catch (SQLException e) {
             e.printStackTrace();

@@ -6,6 +6,9 @@ import java.util.Scanner;
 import br.inatel.stazhi.casodeuso.aluno.ListarEstagiarios;
 import br.inatel.stazhi.casodeuso.aluno.RemoverEstagiario;
 import br.inatel.stazhi.model.aluno.Aluno;
+import br.inatel.stazhi.model.empresa.Empresa;
+import br.inatel.stazhi.model.supervisor.Supervisor;
+import br.inatel.stazhi.repositorio.alunoRepositorio.AlunoRepositorio;
 
 public class GerenciarmentoEstagiariosCLI {
 
@@ -38,5 +41,17 @@ public class GerenciarmentoEstagiariosCLI {
             removerEstagiario.executar(idEstagiario);
             System.out.println("Estagiário com ID " + idEstagiario + " foi removido da empresa.");
         }
+    }
+
+    public static void VerEmpresa(int alunoId) {
+            Empresa empresa =  new AlunoRepositorio().buscaEmpresa(alunoId);
+            if(empresa == null){
+                System.out.println("\nVocê não está numa empresa no momento\n");
+                return;
+            }
+            System.out.println("\n=== Empresa ===");
+            System.out.println("Empresa: " + empresa.getNome());
+            System.out.println("Setor: " + empresa.getSetor());
+            System.out.println("Email: " + empresa.getEmail() +"\n");
     }
 }
