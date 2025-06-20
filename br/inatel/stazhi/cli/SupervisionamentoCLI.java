@@ -6,6 +6,7 @@ import java.util.Scanner;
 import br.inatel.stazhi.casodeuso.supervisor.PararDeSupervisionarAluno;
 import br.inatel.stazhi.casodeuso.supervisor.SupervisionarAluno;
 import br.inatel.stazhi.model.aluno.Aluno;
+import br.inatel.stazhi.model.supervisor.Supervisor;
 import br.inatel.stazhi.repositorio.alunoRepositorio.AlunoRepositorio;
 
 
@@ -139,10 +140,18 @@ public class SupervisionamentoCLI {
             }else{
                 break;
             }
-        }
-
-        
-        
+        }    
     }
+    
+        public static void BuscarSupervisorPorAlunoId(int alunoId){
+            Supervisor supervisor =  new AlunoRepositorio().buscaSupervisor(alunoId);
+            if(supervisor == null){
+                System.out.println("\nVocê não possui um supervisor\n");
+                return;
+            }
+            System.out.println("\n=== Supervisor ===");
+            System.out.println("Nome: " + supervisor.getNome());
+            System.out.println("Email: " + supervisor.getEmail() +"\n");
+        }
 
 }
